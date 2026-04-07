@@ -2,32 +2,24 @@
 
 MemoraDB is a lightweight in-memory key-value store built in Java, inspired by Redis.
 
-## Features
-
-* Set, get, and delete key-value pairs
-* In-memory storage for fast access
-* TCP server to handle multiple clients
-* Thread-safe operations
-
 ## Tech Stack
 
-* Java
+* Java 21
 * Maven
-* TCP Sockets
 * ConcurrentHashMap
 
 ## Getting Started
 
 ### Prerequisites
 
-* Java 17+
+* Java 21
 * Maven
 
 ### Run the project
 
 ```bash
 mvn clean install
-java -cp target/memoradb-1.0-SNAPSHOT.jar com.memoradb.Main
+java -cp target/memoraDB-1.0-SNAPSHOT.jar com.memoraDB.Main
 ```
 
 ## Example Commands
@@ -36,25 +28,54 @@ java -cp target/memoradb-1.0-SNAPSHOT.jar com.memoradb.Main
 SET name prince
 GET name
 DEL name
+EXISTS name
 ```
+
+---
+
+## Status: What's Done ✅
+
+- [x] In-memory key-value storage (ConcurrentHashMap)
+- [x] Basic commands: SET, GET, DEL, EXISTS
+- [x] Console-based REPL interface
+- [x] Thread-safe operations (ConcurrentHashMap)
+- [x] Command pattern architecture
+- [x] Input reader utility (FastReader)
+
+## Status: What's TODO 📝
+
+- [ ] TCP server for multi-client support
+- [ ] Custom protocol (Redis-like)
+- [ ] Input parser (for advanced parsing)
+- [ ] Data persistence (AOF / snapshots)
+- [ ] TTL/Key expiration
+- [ ] LRU cache eviction policy
+- [ ] Error handling & validation
+- [ ] Unit tests
+- [ ] Performance benchmarks
+
+---
 
 ## Project Structure
 
 ```
-server/        -> Handles client connections
-store/         -> Core key-value storage
-command/       -> Command implementations
-parser/        -> Input parsing
-persistence/   -> Data persistence (planned)
-eviction/      -> Cache eviction (planned)
+src/main/java/com/memoraDB/
+├── Main.java              ✅ Console REPL entry point
+├── command/
+│   ├── SetCommand.java    ✅ SET key value
+│   ├── GetCommand.java    ✅ GET key
+│   ├── DelCommand.java    ✅ DEL key
+│   └── ExistsCommand.java ✅ EXISTS key
+├── store/
+│   └── InMemoryDB.java    ✅ Core storage wrapper
+├── server/                📝 TCP server (planned)
+├── parser/                📝 Input parser (planned)
+├── persistance/           📝 Persistence layer (planned)
+├── eviction/              📝 Cache eviction (planned)
+└── util/
+    └── FastReader.java    ✅ Input utility
+
 ```
-
-## Future Improvements
-
-* TTL (key expiration)
-* Persistence (AOF / snapshots)
-* LRU eviction
-* Custom protocol (Redis-like)
 
 ## Inspiration
 
@@ -62,4 +83,4 @@ Inspired by Redis and how in-memory databases are designed.
 
 ---
 
-Built for learning system design and low-level backend concepts.
+Built with ❤️ by Prince

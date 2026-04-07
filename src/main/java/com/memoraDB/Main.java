@@ -39,19 +39,19 @@ public class Main {
           case "SET":
             String key = reader.next();
             String value = reader.next();
-            System.out.println(setCommand.execute(key, value));
+            logger.info(setCommand.execute(key, value));
             break;
           case "GET":
             key = reader.next();
-            System.out.println(getCommand.execute(key));
+            logger.info(getCommand.execute(key));
             break;
           case "DEL":
             key = reader.next();
-            System.out.println(delCommand.execute(key));
+            logger.info(delCommand.execute(key));
             break;
           case "EXISTS":
             key = reader.next();
-            System.out.println(existsCommand.execute(key));
+            logger.info(existsCommand.execute(key));
             break;
           case "EXIT":
             logger.info("MemoraDB is shutting down...");
