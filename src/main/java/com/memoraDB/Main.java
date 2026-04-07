@@ -6,6 +6,9 @@ import com.memoraDB.command.GetCommand;
 import com.memoraDB.command.SetCommand;
 import com.memoraDB.store.InMemoryDB;
 import com.memoraDB.util.FastReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Main {
@@ -14,10 +17,11 @@ public class Main {
   static DelCommand delCommand;
   static ExistsCommand existsCommand;
   static final FastReader reader = new FastReader();
+  static final Logger logger = LoggerFactory.getLogger(Main.class);
   static final InMemoryDB db = new InMemoryDB(new ConcurrentHashMap<>());
 
   static {
-    System.out.println("MemoraDB is initializing...");
+    logger.info("MemoraDB is initializing...");
     setCommand = new SetCommand(db.getStore());
     getCommand = new GetCommand(db.getStore());
     delCommand = new DelCommand(db.getStore());
@@ -25,7 +29,7 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    System.out.println("MemoraDB is ready to accept commands.");
+    logger.info("MemoraDB has been initialized successfully.");
 
     while (true) {
       System.out.print("> ");
@@ -50,13 +54,13 @@ public class Main {
             System.out.println(existsCommand.execute(key));
             break;
           case "EXIT":
-            System.out.println("Exiting MemoraDB. Goodbye!");
+            logger.info("MemoraDB is shutting down...");
             return;
           default:
-            System.out.println("Unknown command: " + command);
+            logger.error("Unknown command: {}", command);
         }
       } catch (Exception e) {
-        System.out.println("Error executing command: " + e.getMessage());
+        logger.error("Error executing command: ", e);
       }
     }
   }
